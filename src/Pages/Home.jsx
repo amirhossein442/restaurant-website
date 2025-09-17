@@ -3,30 +3,44 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 export const Home = () => {
-  const [bgHome, setBgHome] = useState();
+  const [bgHome, setBgHome] = useState([]);
+
   useEffect(() => {
     axios
       .get("https://www.themealdb.com/api/json/v1/1/random.php")
-      .then((res) => setBgHome(res.data.meals));
+      .then((res) => setBgHome(res.data.meals || []));
   }, []);
-  console.log(bgHome);
 
   return (
-    <div className="relative">
+    <div className="relative h-screen w-full overflow-hidden">
+      {/* پس‌زمینه */}
       {bgHome?.map((b, index) => (
-        <div key={index}>
-          <img className="h-fit w-full object-cover" src={b.strMealThumb} alt="is not defind" />
-        </div>
+        <img
+          key={index}
+          className="absolute inset-0 w-full h-full object-cover"
+          src={b.strMealThumb}
+          alt={b.strMeal || "Food background"}
+        />
       ))}
 
-      <Link
-        to={"/menu"}
-        className="absolute bottom-5 left-36 text-slate-950 flex justify-center items-center"
-      >
-        <button className=" mt-5 text-xl border-2 border-rose-700  hover:bg-rose-600 text-white font-bold backdrop-blur-sm px-5 py-2 rounded-md">
-          See menu
-        </button>
-      </Link>
+      {/* لایه تاریک برای خوانایی متن */}
+      <div className="absolute inset-0 bg-black/50"></div>
+
+      {/* متن و دکمه */}
+      <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-rose-400 drop-shadow-lg">
+          Welcome to MyRestaurant
+        </h1>
+        <p className="mt-4 text-lg sm:text-xl text-gray-200 max-w-xl">
+          Discover delicious meals from around the world 🍽
+        </p>
+
+        <Link to="/menu">
+          <button className="mt-8 text-lg sm:text-xl font-bold px-6 py-3 rounded-lg border-2 border-rose-500 text-white bg-rose-600/80 backdrop-blur-md hover:bg-rose-700 hover:scale-105 transition-all shadow-lg">
+            See Menu
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };
