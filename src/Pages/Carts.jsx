@@ -11,7 +11,7 @@ export const Carts = () => {
         if (exsistCart) {
           if (c.count !== 0) {
             return (
-              <div className="border-2 mt-3">
+              <div key={c.id} className="border-2 mt-3">
                 <img className="ml-5 w-fit" src={exsistCart.strCategoryThumb} />
                 <p className="text-center">{exsistCart.strCategory}</p>
                 <div className="flex justify-center">

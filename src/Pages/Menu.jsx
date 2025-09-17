@@ -13,7 +13,7 @@ export const Menu = () => {
       <div className="mt-14">
         <h1 className="text-2xl font-bold">categories</h1>
         {category.map((item) => (
-          <div className="border-2 mt-3">
+          <div key={item.idCategory} className="border-2 mt-3">
             <img className="ml-5 w-fit" src={item.strCategoryThumb} />
             <p className="text-center">{item.strCategory}</p>
             <div className="flex justify-center">

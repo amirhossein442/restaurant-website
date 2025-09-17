@@ -33,9 +33,9 @@ export const SearchBox = () => {
   }, [meal]);
 
   return (
-    <div>
+    <div className="">
       <input
-        className="container px-5 h-10 mb-5 bg-slate-950 text-white w-full"
+        className="container px-5 h-10 mb-5 bg-rose-900   text-white"
         type="text"
         value={meal}
         onChange={(e) => setMeal(e.target.value)}
