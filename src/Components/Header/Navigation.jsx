@@ -13,7 +13,7 @@ export const Navigation = () => {
   return (
     <nav className="relative">
       {menuNav.map((i) => (
-        <Link className=" font-bold mr-5 text-xl text-rose-600" key={i.name} to={i.path}>
+        <Link className=" font-bold mr-5 text-xl text-rose-600 hover:text-rose-400 transition-all duration-200" key={i.name} to={i.path}>
           {i.name}
         </Link>
       ))}
