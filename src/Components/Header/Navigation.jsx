@@ -3,6 +3,7 @@ export const Navigation = () => {
   const menuNav = [
     { name: "Home", path: "/" },
     { name: "Menu", path: "/menu" },
+    { name: "carts", path: "/carts" },
   ];
 
   return (
