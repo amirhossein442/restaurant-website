@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Navigation } from "swiper/modules";
-import {Swiper, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -17,49 +17,60 @@ export const SearchBox = () => {
       );
       setListMeal(data.meals);
     } catch (errore) {
-      console.log(errore.massage);
+      console.log(errore.message);
     }
   }
+
   useEffect(() => {
     const TimeOut = setTimeout(() => {
       if (meal !== "") {
         handeSearch();
       }
-    }, 3000);
+    }, 1000);
 
-    return () => {
-      clearTimeout(TimeOut);
-    };
+    return () => clearTimeout(TimeOut);
   }, [meal]);
 
   return (
-    <div className="">
+    <div className="w-full max-w-4xl mx-auto">
+      {/* Input */}
       <input
-        className="container px-5 h-10 mb-5 bg-rose-900   text-white"
+        className="w-full px-4 py-2 mb-5 rounded-lg bg-rose-700 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-md"
         type="text"
         value={meal}
         onChange={(e) => setMeal(e.target.value)}
-        placeholder="type food..."
+        placeholder="Type food..."
       />
 
-      {listMeal ? (
-        <Swiper navigation={true} modules={[Navigation]} >
+      {/* Swiper */}
+      {listMeal && listMeal.length > 0 ? (
+        <Swiper
+          navigation={true}
+          modules={[Navigation]}
+          breakpoints={{
+            640: { slidesPerView: 2, spaceBetween: 20 },
+            1024: { slidesPerView: 3, spaceBetween: 10 },
+          }}
+          className="pb-10"
+        >
           {listMeal.map((meal, index) => (
             <SwiperSlide
               key={index}
-              className="flex justify-center items-center"
+              className="flex flex-col items-center justify-center"
             >
               <img
-                className="w-full h-44 object-cover"
+                className="w-full h-44 object-cover rounded-xl shadow-lg"
                 src={meal.strMealThumb}
                 alt={meal.strMeal}
               />
-              <p className="text-center">{meal.strMeal}</p>
+              <p className="mt-2 text-center text-white font-semibold">
+                {meal.strMeal}
+              </p>
             </SwiperSlide>
           ))}
         </Swiper>
       ) : (
-        <h1> Is Not Defind</h1>
+        <h1 className="text-center text-gray-300">No results found</h1>
       )}
     </div>
   );

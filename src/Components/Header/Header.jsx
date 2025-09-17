@@ -7,7 +7,7 @@ export const Header = () => {
         <div className="flex items-center space-x-3">
           <img
             className="w-16 h-16 object-cover rounded-full border-2 border-rose-500 shadow-lg"
-            src="/images/restaurant-logo.jpg"
+            src="/images/logo.webp"
             alt="Restaurant Logo"
           />
         </div>
