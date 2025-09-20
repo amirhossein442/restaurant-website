@@ -13,7 +13,6 @@ export const Home = () => {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* پس‌زمینه */}
       {bgHome?.map((b, index) => (
         <img
           key={index}
@@ -23,10 +22,8 @@ export const Home = () => {
         />
       ))}
 
-      {/* لایه تاریک برای خوانایی متن */}
       <div className="absolute inset-0 bg-black/50"></div>
 
-      {/* متن و دکمه */}
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-rose-400 drop-shadow-lg">
           Welcome to MyRestaurant

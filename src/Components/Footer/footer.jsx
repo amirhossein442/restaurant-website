@@ -4,7 +4,6 @@ export default function Footer() {
   return (
     <footer className="bg-gray-950 text-white w-full py-6  border-t border-gray-800">
       <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between px-4 sm:px-6 lg:px-12">
-        {/* لوگو */}
         <div className="flex items-center space-x-3 mb-4 sm:mb-0">
           <div className="w-12 h-12 bg-rose-500 rounded-full flex items-center justify-center shadow-lg">
             <svg
@@ -25,7 +24,6 @@ export default function Footer() {
           <h1 className="text-xl font-bold text-rose-400">RESTAURANT</h1>
         </div>
 
-        {/* متن پایینی */}
         <p className="text-sm text-gray-400">
           © {new Date().getFullYear()} MyRestaurant. All rights reserved.
         </p>
