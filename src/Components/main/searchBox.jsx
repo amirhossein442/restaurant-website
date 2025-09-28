@@ -33,7 +33,6 @@ export const SearchBox = () => {
 
   return (
     <div className="w-full max-w-4xl mx-auto">
-      {/* Input */}
       <input
         className="w-full px-4 py-2 mb-5 rounded-lg bg-rose-700 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-rose-400 shadow-md"
         type="text"
@@ -42,7 +41,6 @@ export const SearchBox = () => {
         placeholder="Type food..."
       />
 
-      {/* Swiper */}
       {listMeal && listMeal.length > 0 ? (
         <Swiper
           navigation={true}

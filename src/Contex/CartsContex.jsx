@@ -4,7 +4,10 @@ import { createContext, useEffect, useState } from "react";
 export const cartsContex = createContext();
 
 export const CartsContextProvider = ({ children }) => {
-  const [cart, setCarts] = useState([]);
+  const [cart, setCarts] = useState(()=> {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
   const [category, setcategory] = useState([]);
 
   const axiosCategory = async () => {
@@ -13,6 +16,7 @@ export const CartsContextProvider = ({ children }) => {
           "https://www.themealdb.com/api/json/v1/1/categories.php"
         );
         setcategory(data.categories);
+
       } catch (errore) {
         console.log(errore.massage);
       }
@@ -20,6 +24,10 @@ export const CartsContextProvider = ({ children }) => {
     useEffect(() => {
       axiosCategory();
     }, []);
+
+    useEffect(()=> {
+      localStorage.setItem("cart", JSON.stringify(cart))
+    },[cart])
   
 
   const handelIncreament = (ID) => {
@@ -42,6 +50,7 @@ export const CartsContextProvider = ({ children }) => {
           ? { ...item, count: item.count === 0 ? 0 : item.count - 1 }
           : item
       )
+      
     );
   };
   return (
