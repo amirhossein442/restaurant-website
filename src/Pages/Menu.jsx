@@ -49,6 +49,7 @@ export const Menu = () => {
                   -
                 </button>
               </div>
+              <div>100$</div>
             </div>
           </div>
         ))}
