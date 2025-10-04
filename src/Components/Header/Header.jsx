@@ -2,7 +2,7 @@ import { Navigation } from "./Navigation";
 
 export const Header = () => {
   return (
-    <header className="bg-gradient-to-r from-black via-gray-900 to-black shadow- sticky top-0 z-50">
+    <header className=" shadow- sticky top-0 z-50">
       <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6 lg:px-12">
         <div className="flex items-center space-x-3">
           <img

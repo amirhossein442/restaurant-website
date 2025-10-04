@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Header } from "../Components/Header/Header";
 
 export const Home = () => {
   const [bgHome, setBgHome] = useState([]);
@@ -13,16 +14,18 @@ export const Home = () => {
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
+      <Header />
+      
       {bgHome?.map((b, index) => (
         <img
           key={index}
-          className="absolute inset-0 w-full h-full object-cover"
+          className=" absolute inset-0 w-full h-full object-cover"
           src={b.strMealThumb}
           alt={b.strMeal || "Food background"}
         />
       ))}
 
-      <div className="absolute inset-0 bg-black/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-b from-black/80  to-black/10"></div>
 
       <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
         <h1 className="text-4xl sm:text-5xl font-extrabold tracking-wide text-rose-400 drop-shadow-lg">

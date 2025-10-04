@@ -16,7 +16,6 @@ function App() {
     <div className="">
       <CartsContextProvider>
         <Router>
-          <Header />
           <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />

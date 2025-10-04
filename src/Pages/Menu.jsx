@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { SearchBox } from "../Components/main/searchBox";
 import { cartsContex } from "../Contex/CartsContex";
+import { Header } from "../Components/Header/Header";
 
 export const Menu = () => {
   const { category, cart, handelIncreament, handelDecrement } =
@@ -8,7 +9,7 @@ export const Menu = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-rose-950 px-4 sm:px-6 lg:px-12 py-8 text-white">
-
+      <Header />
       <div className="flex justify-center mb-8">
         <SearchBox />
       </div>
