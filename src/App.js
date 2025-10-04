@@ -8,6 +8,8 @@ import { Menu } from "./Pages/Menu";
 import Footer from "./Components/Footer/footer";
 import { CartsContextProvider } from "./Contex/CartsContex";
 import { Carts } from "./Pages/Carts";
+import { ScrollToTop } from "./Components/Scroll/ScrollToTop";
+
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
       <CartsContextProvider>
         <Router>
           <Header />
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
