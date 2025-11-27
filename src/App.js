@@ -1,9 +1,6 @@
-import { useEffect, useState } from "react";
 import "./index.css";
-import axios from "axios";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./Pages/Home";
-import { Header } from "./Components/Header/Header";
 import { Menu } from "./Pages/Menu";
 import Footer from "./Components/Footer/footer";
 import { CartsContextProvider } from "./Contex/CartsContex";
