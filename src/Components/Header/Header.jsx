@@ -1,8 +1,19 @@
+import { useEffect, useState } from "react";
 import { Navigation } from "./Navigation";
 
 export const Header = () => {
+  const [scroll, setScroll] = useState(false)
+
+  useEffect(() => {
+    const handelScroll = () => {
+      setScroll(window.scrollY > 10)
+    }
+    window.addEventListener("scroll",handelScroll)
+
+    return () => window.removeEventListener("scroll", handelScroll)
+  }, [])
   return (
-    <header className=" shadow- sticky top-0 z-50">
+    <header className={`transition-all w-full  ${scroll && "backdrop-blur-sm"} duration-300 fixed top-0 z-50`}>
       <div className="max-w-7xl mx-auto flex justify-between items-center h-20 px-4 sm:px-6 lg:px-12">
         <div className="flex items-center space-x-3">
           <img
