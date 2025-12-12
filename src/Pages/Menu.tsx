@@ -3,9 +3,21 @@ import { SearchBox } from "../Components/main/searchBox";
 import { cartsContex } from "../Contex/CartsContex";
 import { Header } from "../Components/Header/Header";
 
-export const Menu = () => {
-  const { category, cart, handelIncreament, handelDecrement } =
-    useContext(cartsContex);
+// ----------------------
+// تایپ‌ها
+// ----------------------
+type CartItem = {
+  id: number;
+  count: number;
+};
+
+
+export const Menu: React.FC = () => {
+  const context = useContext(cartsContex);
+  if (!context) {
+    throw new Error("cartsContex must be used within a CartsContextProvider");
+  }
+  const { category, cart, handelIncreament, handelDecrement } = context;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-black via-gray-950 to-rose-950 px-4 sm:px-6 lg:px-12 py-8 text-white">
@@ -58,3 +70,4 @@ export const Menu = () => {
     </div>
   );
 };
+

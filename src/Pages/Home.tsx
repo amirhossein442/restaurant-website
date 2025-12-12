@@ -3,8 +3,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Header } from "../Components/Header/Header";
 
-export const Home = () => {
-  const [bgHome, setBgHome] = useState([]);
+interface bg {
+  strMeal: string;
+  strMealThumb: string;
+  [key: string]: any;
+}
+
+export const Home: React.FC = () => {
+  const [bgHome, setBgHome] = useState<bg[]>([]);
 
   useEffect(() => {
     axios
@@ -15,13 +21,13 @@ export const Home = () => {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       <Header />
-      
+
       {bgHome?.map((b, index) => (
         <img
           key={index}
           className=" absolute inset-0 w-full h-full object-cover"
-          src={b.strMealThumb}
-          alt={b.strMeal || "Food background"}
+          src={b?.strMealThumb}
+          alt={b?.strMeal || "Food background"}
         />
       ))}
 

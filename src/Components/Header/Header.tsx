@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Navigation } from "./Navigation";
 
-export const Header = () => {
-  const [scroll, setScroll] = useState(false)
+export const Header: React.FC= () => {
+  const [scroll, setScroll] = useState<boolean>(false)
 
   useEffect(() => {
     const handelScroll = () => {

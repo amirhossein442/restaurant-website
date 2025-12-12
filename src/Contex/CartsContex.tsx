@@ -1,26 +1,53 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 
-export const cartsContex = createContext();
+interface CartItem {
+  id: number | string;
+  count: number;
+}
 
-export const CartsContextProvider = ({ children }) => {
-  const [cart, setCarts] = useState(() => {
+interface Category {
+  idCategory: string;
+  strCategory: string;
+  strCategoryThumb: string;
+  strCategoryDescription: string;
+}
+
+interface CartsContextType {
+  cart: CartItem[];
+  category: Category[];
+  total: number;
+  handelIncreament: (id: number | string) => void;
+  handelDecrement: (id: number | string) => void;
+}
+
+export const cartsContex = createContext<CartsContextType | null>(null);
+
+interface Props {
+  children: ReactNode;
+}
+
+export const CartsContextProvider: React.FC<Props> = ({ children }) => {
+  const [cart, setCarts] = useState<CartItem[]>(() => {
     const savedCart = localStorage.getItem("cart");
     return savedCart ? JSON.parse(savedCart) : [];
   });
-  const [category, setcategory] = useState([]);
-  const [total, setTotal] = useState(0);
+
+  const [category, setCategory] = useState<Category[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
   const axiosCategory = async () => {
     try {
       const { data } = await axios.get(
         "https://www.themealdb.com/api/json/v1/1/categories.php"
       );
-      setcategory(data.categories);
-    } catch (errore) {
-      console.log(errore.massage);
+      setCategory(data.categories);
+    } catch (error: any) {
+      console.log(error.message);
     }
   };
+
   useEffect(() => {
     axiosCategory();
   }, []);
@@ -29,7 +56,7 @@ export const CartsContextProvider = ({ children }) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
-  const handelIncreament = (ID) => {
+  const handelIncreament = (ID: number | string) => {
     const existsCart = cart.find((item) => item.id === ID);
     if (existsCart) {
       setCarts(
@@ -42,7 +69,7 @@ export const CartsContextProvider = ({ children }) => {
     }
   };
 
-  const handelDecrement = (ID) => {
+  const handelDecrement = (ID: number | string) => {
     setCarts(
       cart.map((item) =>
         item.id === ID
@@ -54,13 +81,7 @@ export const CartsContextProvider = ({ children }) => {
 
   return (
     <cartsContex.Provider
-      value={{
-        category,
-        cart,
-        handelIncreament,
-        handelDecrement,
-        total,
-      }}
+      value={{ category, cart, handelIncreament, handelDecrement, total }}
     >
       {children}
     </cartsContex.Provider>

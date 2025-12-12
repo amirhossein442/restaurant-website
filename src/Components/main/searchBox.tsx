@@ -6,28 +6,41 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 
-export const SearchBox = () => {
-  const [meal, setMeal] = useState("");
-  const [listMeal, setListMeal] = useState([]);
+// ----------------------
+// تایپ‌ها
+// ----------------------
+interface Meal {
+  strMeal: string;
+  strMealThumb: string;
+  [key: string]: any; // برای هر فیلد اضافی که API برمی‌گرداند
+}
 
-  async function handeSearch() {
+// ----------------------
+// کامپوننت
+// ----------------------
+export const SearchBox: React.FC = () => {
+  const [meal, setMeal] = useState<string>("");
+  const [listMeal, setListMeal] = useState<Meal[]>([]);
+
+  async function handleSearch(): Promise<void> {
     try {
       const { data } = await axios.get(
         `https://www.themealdb.com/api/json/v1/1/search.php?s=${meal}`
       );
-      setListMeal(data.meals);
-    } catch (errore) {
-      console.log(errore.message);
+      setListMeal(data.meals || []); // اگر API چیزی برنگرداند، آرایه خالی
+    } catch (error: any) {
+      console.log(error.message);
     }
   }
 
   useEffect(() => {
-    const TimeOut = setTimeout(() => {
+    const timeout = setTimeout(() => {
       if (meal !== "") {
-        handeSearch();
+        handleSearch();
       }
     }, 1000);
-    return () => clearTimeout(TimeOut);
+
+    return () => clearTimeout(timeout);
   }, [meal]);
 
   return (
@@ -50,18 +63,18 @@ export const SearchBox = () => {
           }}
           className="pb-10"
         >
-          {listMeal.map((meal, index) => (
+          {listMeal.map((mealItem, index) => (
             <SwiperSlide
               key={index}
               className="flex flex-col items-center justify-center"
             >
               <img
                 className="w-full h-44 object-cover rounded-xl shadow-lg"
-                src={meal.strMealThumb}
-                alt={meal.strMeal}
+                src={mealItem.strMealThumb}
+                alt={mealItem.strMeal}
               />
               <p className="mt-2 text-center text-white font-semibold">
-                {meal.strMeal}
+                {mealItem.strMeal}
               </p>
             </SwiperSlide>
           ))}
